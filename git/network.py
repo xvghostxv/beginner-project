@@ -15,8 +15,8 @@ class network:
         try:
             self.client.connect(self.addr)
             return self.client.recv(2048).decode()
-        except:
-            pass
+        except socket.error as e:
+            raise ConnectionError("Failed to connect to the server.") from e
     
     def send(self, data):
         try:
@@ -28,12 +28,4 @@ class network:
 
 
 n = network()
-
-
-
-
-
-
-
-
 
